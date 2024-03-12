@@ -58,3 +58,5 @@ site-lisp/package/
 /projects
 /forge-*.sqlite
 /projectile.cache
+/org-persist
+/server/server
