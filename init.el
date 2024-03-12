@@ -9,12 +9,15 @@
 ;; Produce backtraces when errors occur: can be helpful to diagnose startup issues
 ;;(setq debug-on-error t)
 
-(setq url-proxy-services '(("http" . "127.0.0.1:7890")
-                           ("https" . "127.0.0.1:7890")))
+;; (if (eq system-type 'windows-nt)
+;;     (setq url-proxy-services '(("http" . "127.0.0.1:10809")
+;;                                ("https" . "127.0.0.1:10809")))
+;;   (setq url-proxy-services '(("http" . "127.0.0.1:7890")
+;;                              ("https" . "127.0.0.1:7890"))))
 
 (let ((minver "27.1"))
-  (when (version< emacs-version minver)
-    (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
+     (when (version< emacs-version minver)
+           (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
 (when (version< emacs-version "28.1")
   (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
 
@@ -203,7 +206,7 @@
 
 ;; eat
 (if (eq system-type 'windows-nt)
-    (make-comint-in-buffer "powershell" nil "powershell" nil))
+  (make-comint-in-buffer "powershell" nil "powershell" nil))
 
 (global-set-key (kbd "M-o") 'other-window)
 
@@ -212,6 +215,32 @@
   :ensure
   :config
   (tab-bar-echo-area-mode 1))
+
+;; Flycheck
+(global-flycheck-mode)
+(add-hook 'flymake-mode-hook 'flymake-flycheck-auto)
+;; (require 'flycheck-eglot)
+;; (global-flycheck-eglot-mode 1)
+(require 'flycheck-pos-tip)
+(with-eval-after-load 'flycheck
+  (flycheck-pos-tip-mode))
+
+;; LSP-mode
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (c++-mode . lsp)
+         (c-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+(use-package lsp-ui :commands lsp-ui-mode)
+;; (global-set-key (kbd "C-.") lsp-find-definition)
+(define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
+(define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
+
 
 ;; Local Variables:
 ;; coding: utf-8
