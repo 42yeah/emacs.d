@@ -9,8 +9,8 @@
 ;; Produce backtraces when errors occur: can be helpful to diagnose startup issues
 ;;(setq debug-on-error t)
 
-(setq url-proxy-services '(("http" . "127.0.0.1:10809")
-                           ("https" . "127.0.0.1:10809")))
+(setq url-proxy-services '(("http" . "127.0.0.1:7890")
+                           ("https" . "127.0.0.1:7890")))
 
 (let ((minver "27.1"))
   (when (version< emacs-version minver)
@@ -202,9 +202,16 @@
 (setq projectile-switch-project-action 'neotree-projectile-action)
 
 ;; eat
-(make-comint-in-buffer "powershell" nil "powershell" nil)
+(if (eq system-type 'windows-nt)
+    (make-comint-in-buffer "powershell" nil "powershell" nil))
 
 (global-set-key (kbd "M-o") 'other-window)
+
+;; tab bar to echo area
+(use-package tab-bar-echo-area
+  :ensure
+  :config
+  (tab-bar-echo-area-mode 1))
 
 ;; Local Variables:
 ;; coding: utf-8
