@@ -9,15 +9,15 @@
 ;; Produce backtraces when errors occur: can be helpful to diagnose startup issues
 ;;(setq debug-on-error t)
 
-;; (if (eq system-type 'windows-nt)
-;;     (setq url-proxy-services '(("http" . "127.0.0.1:10809")
-;;                                ("https" . "127.0.0.1:10809")))
-;;   (setq url-proxy-services '(("http" . "127.0.0.1:7890")
-;;                              ("https" . "127.0.0.1:7890"))))
+(if (eq system-type 'windows-nt)
+    (setq url-proxy-services '(("http" . "127.0.0.1:10809")
+                               ("https" . "127.0.0.1:10809")))
+  (setq url-proxy-services '(("http" . "127.0.0.1:7890")
+                             ("https" . "127.0.0.1:7890"))))
 
 (let ((minver "27.1"))
-     (when (version< emacs-version minver)
-           (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
+  (when (version< emacs-version minver)
+    (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
 (when (version< emacs-version "28.1")
   (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
 
@@ -237,6 +237,7 @@
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 (use-package lsp-ui :commands lsp-ui-mode)
+(require 'lsp-ui)
 ;; (global-set-key (kbd "C-.") lsp-find-definition)
 (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
 (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
