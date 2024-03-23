@@ -204,10 +204,6 @@
 (setq neo-theme (if (display-graphic-p) 'ascii 'arrow))
 (setq projectile-switch-project-action 'neotree-projectile-action)
 
-;; eat
-(if (eq system-type 'windows-nt)
-  (make-comint-in-buffer "powershell" nil "powershell" nil))
-
 (global-set-key (kbd "M-o") 'other-window)
 
 ;; tab bar to echo area
@@ -216,8 +212,9 @@
   :config
   (tab-bar-echo-area-mode 1))
 
-;; Flycheck
+;; Flycheck & eglot
 (global-flycheck-mode)
+(require 'eglot)
 (add-hook 'flymake-mode-hook 'flymake-flycheck-auto)
 (require 'flycheck-eglot)
 (global-flycheck-eglot-mode 1)
@@ -225,13 +222,18 @@
 (with-eval-after-load 'flycheck
   (flycheck-pos-tip-mode))
 
-;; eglot
-(require 'eglot)
 (require 'consult-eglot)
 (add-hook 'c++-mode-hook
 	  (lambda () (eglot-ensure)
 	    (local-set-key (kbd "C-M-.") #'consult-eglot-symbols)
 	    (local-set-key (kbd "C-M-;") #'imenu)))
+(use-package cape
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-elisp-block))
+(advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+(advice-add 'eglot-completion-at-point :around #'cape-wrap-noninterruptible)
 
 ;; auto dark
 (require 'auto-dark)
@@ -379,16 +381,23 @@
 (add-to-list 'auto-mode-alist '("\\.cu\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cuh\\'" . c++-mode))
 
+;; Powershell, and other windows-specific settings
+(when (eq system-type 'windows-nt) (make-comint-in-buffer "powershell" nil "powershell" nil)
+      (use-package powershell))
+
 ;; Knicks and Knacks
 (setq adaptive-wrap-extra-indent 2)
 ;; (global-visual-line-mode)
 ;; (add-hook 'visual-line-mode-hook #'adaptive-wrap-prefix-mode)
 (good-scroll-mode 1)
-(global-set-key (kbd "C-v") #'good-scroll-up-full-screen)
-(global-set-key (kbd "S-C-v") #'good-scroll-down-full-screen)
-(setq package-check-signature nil) ; something is wrong with my device on this; doens't matter though, because we will always use 443 anyways
+(setq package-check-signature nil) ; something is wrong with my device
+                                        ; on this; doens't matter though,
+                                        ; because we will always use 443
+                                        ; anyways
 (require 'zones)
 (setq-default indent-tabs-mode nil)
+(add-hook 'c++-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
 (require 'plz)
 ;; (use-package moody
 ;;   :config
@@ -410,10 +419,29 @@
 (require 'bln-mode)
 (global-set-key (kbd "M-<right>") #'bln-forward-half)
 (global-set-key (kbd "M-<left>") #'bln-backward-half)
+(global-set-key (kbd "M-<up>") (lambda () (interactive) (forward-line -4)))
+(global-set-key (kbd "M-<down>") (lambda () (interactive) (forward-line 4)))
+
+(require 'good-scroll)
+(defun good-scroll-down-half-screen ()
+  "Scroll down by half a screen."
+  (interactive)
+  (good-scroll-move (- (/ (good-scroll--window-usable-height) 2))))
+(defun good-scroll-up-half-screen ()
+  "Scroll up by half a screen."
+  (interactive)
+  (good-scroll-move (/ (good-scroll--window-usable-height) 2)))
+(global-set-key (kbd "C-v") #'good-scroll-up-half-screen)
+(global-set-key (kbd "S-C-v") #'good-scroll-down-half-screen)
+
+(defadvice projectile-project-root (around ignore-remote first activate)
+  "Do not enable projecile during remote sessions, i.e. tramp."
+  (unless (file-remote-p default-directory) ad-do-it))
+(setq vc-handled-backends ())
 
 ;; https://stackoverflow.com/questions/1249497/command-to-center-screen-horizontally-around-cursor-on-emacs/1249665#1249665
 (defun my-horizontal-recenter ()
-  "make the point horizontally centered in the window"
+  "Make the point horizontally centered in the window."
   (interactive)
   (let ((mid (/ (window-width) 2))
         (line-len (save-excursion (end-of-line) (current-column)))
@@ -422,6 +450,9 @@
         (set-window-hscroll (selected-window)
                             (- cur mid)))))
 (global-set-key (kbd "C-S-l") 'my-horizontal-recenter)
+
+(require 'undo-tree)
+(global-undo-tree-mode)
 
 ;; Local Variables:
 ;; coding: utf-8

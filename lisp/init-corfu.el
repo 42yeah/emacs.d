@@ -5,7 +5,7 @@
 ;; WAITING: haskell-mode sets tags-table-list globally, breaks tags-completion-at-point-function
 ;; TODO Default sort order should place [a-z] before punctuation
 
-(setq tab-always-indent 'complete)
+;; (setq tab-always-indent 'complete)
 (when (maybe-require-package 'orderless)
   (with-eval-after-load 'vertico
     (require 'orderless)
