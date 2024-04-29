@@ -213,6 +213,7 @@
   (tab-bar-echo-area-mode 1))
 
 ;; Flycheck & eglot
+(require 'flycheck)
 (global-flycheck-mode)
 (require 'eglot)
 (add-hook 'flymake-mode-hook 'flymake-flycheck-auto)
@@ -409,13 +410,19 @@
       telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
       telephone-line-primary-right-separator 'telephone-line-cubed-right
       telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
-(setq telephone-line-height 32
-      telephone-line-evil-use-short-tag t)
+(if (eq system-type 'windows-nt)
+    (setq telephone-line-height 32
+          telephone-line-evil-use-short-tag t)
+  (setq telephone-line-height 20
+        telephone-line-evil-use-short-tag t))
+
 (telephone-line-mode 1)
 (require 'avy)
 (avy-setup-default)
 (global-set-key (kbd "M-g g") #'avy-goto-line)
 (global-set-key (kbd "C-'") #'avy-goto-char)
+(add-hook 'org-mode-hook (lambda () (local-set-key (kbd "C-'")
+                                                   #'avy-goto-char)))
 (require 'bln-mode)
 (global-set-key (kbd "M-<right>") #'bln-forward-half)
 (global-set-key (kbd "M-<left>") #'bln-backward-half)
@@ -453,6 +460,12 @@
 
 (require 'undo-tree)
 (global-undo-tree-mode)
+;; (setq undo-tree-history-directory-alist '((".") . "~/.emacs.d/undo"))
+
+(setq lem-instance-url "https://lemm.ee")
+;; (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+(require 'hyperbole)
+(hyperbole-mode 1)
 
 ;; Local Variables:
 ;; coding: utf-8
