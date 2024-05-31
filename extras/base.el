@@ -28,11 +28,16 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
 (use-package avy
   :ensure t
   :demand t
   :bind (("C-c j" . avy-goto-line)
-         ("s-j"   . avy-goto-char-timer)))
+         ("M-j"   . avy-goto-char-timer)
+	     ("C-j"   . avy-goto-char)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -180,3 +185,10 @@
   :ensure t
   :config
   (setq wgrep-auto-save-buffer t))
+
+;; Cut/copy whole line or region. SO useful.
+(use-package whole-line-or-region
+  :ensure t
+  :config
+  (whole-line-or-region-global-mode))
+

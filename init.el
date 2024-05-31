@@ -26,6 +26,13 @@
 (when (< emacs-major-version 29)
   (error (format "Emacs Bedrock only works with Emacs 29 and newer; you have version ~a" emacs-major-version)))
 
+(if (eq system-type 'windows-nt)
+    (setq url-proxy-services '(("http" . "127.0.0.1:10809")
+                               ("https" . "127.0.0.1:10809")))
+  (setq url-proxy-services '(("http" . "127.0.0.1:7890")
+                             ("https" . "127.0.0.1:7890"))))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Basic settings
@@ -93,7 +100,11 @@ If the new path's directories does not exist, create them."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Show the help buffer after startup
-(add-hook 'after-init-hook 'help-quick)
+;; (add-hook 'after-init-hook 'help-quick)
+(add-hook 'after-init-hook 'recentf-mode)
+(setq-default
+ recentf-max-saved-items 1000
+ recentf-exclude `("/tmp/" "/ssh:" ,(concat package-user-dir "/.*-autoloads\\.el\\'")))
 
 ;; which-key: shows a popup of available keybindings when typing a long key
 ;; sequence (e.g. C-x ...)
@@ -155,15 +166,15 @@ If the new path's directories does not exist, create them."
 
 ;; We won't set these, but they're good to know about
 ;;
-;; (setopt indent-tabs-mode nil)
-;; (setopt tab-width 4)
+(setopt indent-tabs-mode nil)
+(setopt tab-width 4)
 
 ;; Misc. UI tweaks
 (blink-cursor-mode -1)                                ; Steady cursor
 (pixel-scroll-precision-mode)                         ; Smooth scrolling
 
 ;; Use common keystrokes by default
-(cua-mode)
+;; (cua-mode)
 
 ;; Display line numbers in programming mode
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
@@ -182,7 +193,7 @@ If the new path's directories does not exist, create them."
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Show the tab-bar as soon as tab-bar functions are invoked
+;; nShow the tab-bar as soon as tab-bar functions are invoked
 (setopt tab-bar-show 1)
 
 ;; Add the time to the tab-bar, if visible
@@ -213,10 +224,10 @@ If the new path's directories does not exist, create them."
 
 ;; UI/UX enhancements mostly focused on minibuffer and autocompletion interfaces
 ;; These ones are *strongly* recommended!
-;(load-file (expand-file-name "extras/base.el" user-emacs-directory))
+(load-file (expand-file-name "extras/base.el" user-emacs-directory))
 
 ;; Packages for software development
-;(load-file (expand-file-name "extras/dev.el" user-emacs-directory))
+(load-file (expand-file-name "extras/dev.el" user-emacs-directory))
 
 ;; Vim-bindings in Emacs (evil-mode configuration)
 ;(load-file (expand-file-name "extras/vim-like.el" user-emacs-directory))
@@ -245,7 +256,18 @@ If the new path's directories does not exist, create them."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(which-key)))
+ '(c-basic-offset 4)
+ '(c-default-style
+   '((java-mode . "java")
+     (awk-mode . "awk")
+     (csharp-mode . "csharp")
+     (other . "linux")))
+ '(c-ts-mode-indent-offset 4)
+ '(c-ts-mode-indent-style 'linux)
+ '(delete-selection-mode nil)
+ '(modus-themes-vivendi-color-overrides nil)
+ '(package-selected-packages
+   '(json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
