@@ -256,6 +256,7 @@ If the new path's directories does not exist, create them."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style
    '((java-mode . "java")
@@ -264,13 +265,17 @@ If the new path's directories does not exist, create them."
      (other . "linux")))
  '(c-ts-mode-indent-offset 4)
  '(c-ts-mode-indent-style 'linux)
+ '(column-number-mode t)
  '(delete-selection-mode nil)
+ '(display-time-mode t)
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
-   '(json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key)))
+   '(json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+ '(tab-bar-mode t)
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "JuliaMono" :foundry "corm" :slant normal :weight regular :height 100 :width normal)))))
