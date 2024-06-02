@@ -10,3 +10,5 @@
 /recentf
 /url
 /tree-sitter
+/elpa-*
+/server
