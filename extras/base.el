@@ -34,7 +34,7 @@
 
 (use-package auctex
   :ensure t
-  :mode (("\\.tex\\'" . LaTeX-mode))
+  ;; :mode (("\\.tex\\'" . LaTeX-mode))
   :config (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   (setq TeX-auto-save t) (setq TeX-parse-self t) (setq-default TeX-master nil))
 

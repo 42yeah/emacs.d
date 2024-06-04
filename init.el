@@ -284,6 +284,7 @@ If the new path's directories does not exist, create them."
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
    '(auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+ '(recenter-positions '(middle bottom top))
  '(safe-local-variable-values
    '((TeX-master . t)
      (reftex-default-bibliography "./adaptive.bib")))
