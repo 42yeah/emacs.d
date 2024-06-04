@@ -13,3 +13,6 @@
 /elpa-*
 /server
 /tramp
+/bookmarks
+/custom.el
+/nov-places

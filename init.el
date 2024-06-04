@@ -229,6 +229,9 @@ If the new path's directories does not exist, create them."
 ;; Packages for software development
 (load-file (expand-file-name "extras/dev.el" user-emacs-directory))
 
+;; My custom scripts
+(load-file (expand-file-name "custom.el" user-emacs-directory))
+
 ;; Vim-bindings in Emacs (evil-mode configuration)
 ;(load-file (expand-file-name "extras/vim-like.el" user-emacs-directory))
 
@@ -256,6 +259,14 @@ If the new path's directories does not exist, create them."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(TeX-view-program-selection
+   '(((output-dvi has-no-display-manager)
+      "dvi2tty")
+     ((output-dvi style-pstricks)
+      "dvips and gv")
+     (output-dvi "xdvi")
+     (output-pdf "Okular")
+     (output-html "xdg-open")))
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style
@@ -263,16 +274,22 @@ If the new path's directories does not exist, create them."
      (awk-mode . "awk")
      (csharp-mode . "csharp")
      (other . "linux")))
+ '(c-offsets-alist '((inline-open . 0)))
  '(c-ts-mode-indent-offset 4)
  '(c-ts-mode-indent-style 'linux)
  '(column-number-mode t)
- '(delete-selection-mode nil)
+ '(delete-selection-mode t)
  '(display-time-mode t)
+ '(global-visible-mark-mode t)
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
-   '(json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+   '(auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+ '(safe-local-variable-values
+   '((TeX-master . t)
+     (reftex-default-bibliography "./adaptive.bib")))
  '(tab-bar-mode t)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(visible-mark-max 20))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

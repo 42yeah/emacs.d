@@ -32,12 +32,19 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
+(use-package auctex
+  :ensure t
+  :mode (("\\.tex\\'" . LaTeX-mode))
+  :config (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (setq TeX-auto-save t) (setq TeX-parse-self t) (setq-default TeX-master nil))
+
 (use-package avy
   :ensure t
   :demand t
-  :bind (("C-c j" . avy-goto-line)
-         ("M-j"   . avy-goto-char-timer)
-	     ("C-j"   . avy-goto-char)))
+  :bind (("C-c j"   . avy-goto-line)
+         ("M-g M-g" . avy-goto-line)
+         ("M-j"     . avy-goto-char-timer))
+  :bind* ("C-j" . avy-goto-char))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -48,8 +55,7 @@
 ;; Consult: Misc. enhanced commands
 (use-package consult
   :ensure t
-  :bind (
-         ;; Drop-in replacements
+  :bind (;; Drop-in replacements
          ("C-x b" . consult-buffer)     ; orig. switch-to-buffer
          ("M-y"   . consult-yank-pop)   ; orig. yank-pop
          ;; Searching
@@ -58,12 +64,17 @@
          ("M-s s" . consult-line)       ; consult-line instead of isearch, bind
          ("M-s L" . consult-line-multi) ; isearch to M-s s
          ("M-s o" . consult-outline)
+         ("M-s g" . consult-grep)
+         ("M-s l" . consult-line)            ; needed by consult-line to detect isearch
+         ("M-s L" . consult-line-multi)      ; needed by consult-line to detect isearch
+         ("C-x r b" . consult-bookmark)      ; orig. bookmark-jump
+         ("M-g m" . consult-mark)
+         ;; ("C-u C-SPC" . consult-mark)
+         ("M-g k" . consult-global-mark)
          ;; Isearch integration
          :map isearch-mode-map
          ("M-e" . consult-isearch-history)   ; orig. isearch-edit-string
          ("M-s e" . consult-isearch-history) ; orig. isearch-edit-string
-         ("M-s l" . consult-line)            ; needed by consult-line to detect isearch
-         ("M-s L" . consult-line-multi)      ; needed by consult-line to detect isearch
          )
   :config
   ;; Narrowing lets you restrict results to certain groups of candidates
