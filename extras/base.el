@@ -65,8 +65,20 @@
   (let ((half-height (/ (window-pixel-height) 2)))
     (pixel-scroll-precision-interpolate (* 0.5 (- half-height)))))
 
+(defun pixel-scroll-kbd-up-precise ()
+  (interactive)
+  (let ((half-height (/ (window-pixel-height) 2)))
+    (pixel-scroll-precision-interpolate (* 0.25 half-height))))
+
+(defun pixel-scroll-kbd-down-precise ()
+  (interactive)
+  (let ((half-height (/ (window-pixel-height) 2)))
+    (pixel-scroll-precision-interpolate (* 0.25 (- half-height)))))
+
 (global-set-key (kbd "C-v") 'pixel-scroll-kbd-down)
 (global-set-key (kbd "M-v") 'pixel-scroll-kbd-up)
+(global-set-key (kbd "C-S-v") 'pixel-scroll-kbd-down-precise)
+(global-set-key (kbd "C-M-S-v") 'pixel-scroll-kbd-up-precise)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -94,6 +106,7 @@
          ("M-g m" . consult-mark)
          ;; ("C-u C-SPC" . consult-mark)
          ("M-g k" . consult-global-mark)
+         ("C-c !" . consult-flymake)
          ;; Isearch integration
          :map isearch-mode-map
          ("M-e" . consult-isearch-history)   ; orig. isearch-edit-string
