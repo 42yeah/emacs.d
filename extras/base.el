@@ -32,11 +32,12 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(use-package auctex
-  :ensure t
-  ;; :mode (("\\.tex\\'" . LaTeX-mode))
+(use-package latex
+  :ensure auctex
+  :mode (("\\.tex\\'" . LaTeX-mode))
   :config (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (setq TeX-auto-save t) (setq TeX-parse-self t) (setq-default TeX-master nil))
+  (setq TeX-auto-save t) (setq TeX-parse-self t) (setq-default TeX-master nil)
+  (message "AUCTeX enabled."))
 
 (use-package avy
   :ensure t
@@ -44,7 +45,29 @@
   :bind (("C-c j"   . avy-goto-line)
          ("M-g M-g" . avy-goto-line)
          ("M-j"     . avy-goto-char-timer))
-  :bind* ("C-j" . avy-goto-char))
+  :bind* (("C-j" . avy-goto-char)
+          ("C-S-j" . avy-goto-char-2)))
+
+;; Navigational aids
+
+(use-package beacon
+  :ensure t
+  :config (beacon-mode))
+
+;; Smooth, pixel scroll (hopefully)
+(defun pixel-scroll-kbd-up ()
+  (interactive)
+  (let ((half-height (/ (window-pixel-height) 2)))
+    (pixel-scroll-precision-interpolate (* 0.5 half-height))))
+
+(defun pixel-scroll-kbd-down ()
+  (interactive)
+  (let ((half-height (/ (window-pixel-height) 2)))
+    (pixel-scroll-precision-interpolate (* 0.5 (- half-height)))))
+
+(global-set-key (kbd "C-v") 'pixel-scroll-kbd-down)
+(global-set-key (kbd "M-v") 'pixel-scroll-kbd-up)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -203,3 +226,7 @@
   :config
   (whole-line-or-region-global-mode))
 
+(use-package hl-todo
+  :ensure t
+  :config
+  (global-hl-todo-mode))

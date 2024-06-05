@@ -267,6 +267,9 @@ If the new path's directories does not exist, create them."
      (output-dvi "xdvi")
      (output-pdf "Okular")
      (output-html "xdg-open")))
+ '(beacon-blink-when-point-moves-vertically 5)
+ '(beacon-color "#ffaa11")
+ '(beacon-size 40)
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style
@@ -281,9 +284,16 @@ If the new path's directories does not exist, create them."
  '(delete-selection-mode t)
  '(display-time-mode t)
  '(global-visible-mark-mode t)
+ '(hl-todo-color-background nil)
+ '(mc/always-run-for-all t)
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
-   '(auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+   '(beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+ '(pixel-scroll-mode t)
+ '(pixel-scroll-precision-interpolation-between-scroll 0.001)
+ '(pixel-scroll-precision-interpolation-total-time 0.16)
+ '(pixel-scroll-precision-mode t)
+ '(pixel-scroll-precision-use-momentum nil)
  '(recenter-positions '(middle bottom top))
  '(safe-local-variable-values
    '((TeX-master . t)
