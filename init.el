@@ -232,6 +232,10 @@ If the new path's directories does not exist, create them."
 ;; My custom scripts
 (load-file (expand-file-name "custom.el" user-emacs-directory))
 
+;; PragmataPro Ligatures
+(load-file (expand-file-name "pragmatapro-lig.el" user-emacs-directory))
+(pragmatapro-lig-global-mode)
+
 ;; Vim-bindings in Emacs (evil-mode configuration)
 ;(load-file (expand-file-name "extras/vim-like.el" user-emacs-directory))
 
@@ -291,7 +295,7 @@ If the new path's directories does not exist, create them."
  '(mc/always-run-for-all t)
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
-   '(beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+   '(dimmer solaire-mode ligature-pragmatapro annotate beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolation-between-scroll 0.001)
  '(pixel-scroll-precision-interpolation-total-time 0.1)
@@ -309,4 +313,4 @@ If the new path's directories does not exist, create them."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "JuliaMono" :foundry "corm" :slant normal :weight regular :height 100 :width normal)))))
+ '(default ((t (:family "PragmataPro Liga" :foundry "FSD " :slant normal :weight regular :height 110 :width normal)))))

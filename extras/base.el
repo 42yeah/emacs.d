@@ -80,7 +80,6 @@
 (global-set-key (kbd "C-S-v") 'pixel-scroll-kbd-down-precise)
 (global-set-key (kbd "C-M-S-v") 'pixel-scroll-kbd-up-precise)
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Power-ups: Embark and Consult
