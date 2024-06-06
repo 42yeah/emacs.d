@@ -13,3 +13,7 @@
 
 (global-set-key (kbd "C-x 2") (split-window-func-with-other-buffer 'split-window-vertically))
 (global-set-key (kbd "C-x 3") (split-window-func-with-other-buffer 'split-window-horizontally))
+
+;; Markdown-mode
+(use-package markdown-mode
+  :ensure t)
