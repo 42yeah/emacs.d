@@ -229,8 +229,11 @@ If the new path's directories does not exist, create them."
 ;; Packages for software development
 (load-file (expand-file-name "extras/dev.el" user-emacs-directory))
 
-;; My custom scripts
+;; My local, custom scripts
 (load-file (expand-file-name "custom.el" user-emacs-directory))
+
+;; My global, custom scripts
+(load-file (expand-file-name "custom-global.el" user-emacs-directory))
 
 ;; PragmataPro Ligatures
 (load-file (expand-file-name "pragmatapro-lig.el" user-emacs-directory))
@@ -295,7 +298,7 @@ If the new path's directories does not exist, create them."
  '(mc/always-run-for-all t)
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
-   '(dimmer solaire-mode ligature-pragmatapro annotate beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+   '(ligature-pragmatapro annotate beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolation-between-scroll 0.001)
  '(pixel-scroll-precision-interpolation-total-time 0.1)
