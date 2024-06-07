@@ -100,12 +100,11 @@
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
   (add-hook 'c-ts-mode-hook 'eglot-ensure)
+  (add-hook 'c++-ts-mode-hook 'eglot-ensure)
   (add-hook 'python-ts-mode-hook 'eglot-ensure)
   ; (add-to-list 'eglot-server-programs
                                         ;              '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   )
-
-
 
 ;; Treesitter options
 (setq treesit-language-source-alist

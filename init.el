@@ -301,7 +301,7 @@ If the new path's directories does not exist, create them."
  '(mc/always-run-for-all t)
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
-   '(markdown-mode ligature-pragmatapro annotate beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+   '(cmake-mode vterm markdown-mode ligature-pragmatapro annotate beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolation-between-scroll 0.001)
  '(pixel-scroll-precision-interpolation-total-time 0.1)
@@ -309,7 +309,12 @@ If the new path's directories does not exist, create them."
  '(pixel-scroll-precision-use-momentum nil)
  '(recenter-positions '(middle bottom top))
  '(safe-local-variable-values
-   '((TeX-master . t)
+   '((vc-default-patch-addressee . "bug-gnu-emacs@gnu.org")
+     (etags-regen-ignores "test/manual/etags/")
+     (etags-regen-regexp-alist
+      (("c" "objc")
+       "/[ \11]*DEFVAR_[A-Z_ \11(]+\"\\([^\"]+\\)\"/\\1/" "/[ \11]*DEFVAR_[A-Z_ \11(]+\"[^\"]+\",[ \11]\\([A-Za-z0-9_]+\\)/\\1/"))
+     (TeX-master . t)
      (reftex-default-bibliography "./adaptive.bib")))
  '(tab-bar-close-button-show nil)
  '(tab-bar-mode t)

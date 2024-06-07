@@ -16,4 +16,9 @@
 
 ;; Markdown-mode
 (use-package markdown-mode
-  :ensure t)
+  :ensure t
+  :defer t)
+
+(use-package cmake-mode
+  :ensure t
+  :defer t)
