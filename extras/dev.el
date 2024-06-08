@@ -106,9 +106,6 @@
   ;;               '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   )
 
-(use-package treesit-fold
-  :straight (treesit-fold :type git :host github :repo "emacs-tree-sitter/treesit-fold"))
-
 ;; Treesitter options
 (setq treesit-language-source-alist
    '((bash "https://github.com/tree-sitter/tree-sitter-bash")
