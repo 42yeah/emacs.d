@@ -102,9 +102,12 @@
   (add-hook 'c-ts-mode-hook 'eglot-ensure)
   (add-hook 'c++-ts-mode-hook 'eglot-ensure)
   (add-hook 'python-ts-mode-hook 'eglot-ensure)
-  ; (add-to-list 'eglot-server-programs
-                                        ;              '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
+  ;; (add-to-list 'eglot-server-programs
+  ;;               '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   )
+
+(use-package treesit-fold
+  :straight (treesit-fold :type git :host github :repo "emacs-tree-sitter/treesit-fold"))
 
 ;; Treesitter options
 (setq treesit-language-source-alist

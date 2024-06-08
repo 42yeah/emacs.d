@@ -36,8 +36,7 @@
   :ensure auctex
   :mode (("\\.tex\\'" . LaTeX-mode))
   :config (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (setq TeX-auto-save t) (setq TeX-parse-self t) (setq-default TeX-master nil)
-  (message "AUCTeX enabled."))
+  (setq TeX-auto-save t) (setq TeX-parse-self t) (setq-default TeX-master nil))
 
 (use-package avy
   :ensure t

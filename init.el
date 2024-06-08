@@ -284,7 +284,7 @@ If the new path's directories does not exist, create them."
      (awk-mode . "awk")
      (csharp-mode . "csharp")
      (other . "linux")))
- '(c-offsets-alist '((inline-open . 0)))
+ '(c-offsets-alist '((inline-open . +)))
  '(c-ts-mode-indent-offset 4)
  '(c-ts-mode-indent-style 'linux)
  '(column-number-mode t)
@@ -301,7 +301,7 @@ If the new path's directories does not exist, create them."
  '(mc/always-run-for-all t)
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
-   '(cmake-mode vterm markdown-mode ligature-pragmatapro annotate beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+   '(ujelly-theme tangonov-theme tango-plus-theme tangotango-theme apropospriate-theme pulsar svelte-mode cmake-mode vterm markdown-mode ligature-pragmatapro annotate beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolation-between-scroll 0.001)
  '(pixel-scroll-precision-interpolation-total-time 0.1)
