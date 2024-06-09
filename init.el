@@ -299,6 +299,8 @@ If the new path's directories does not exist, create them."
  '(electric-pair-mode t)
  '(global-visible-mark-mode t)
  '(hl-todo-color-background nil)
+ '(kind-icon-default-style
+   '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 0.7 :scale 1.0 :background nil))
  '(lambda-line-vc-symbol "")
  '(mc/always-run-for-all t)
  '(modus-themes-vivendi-color-overrides nil)
