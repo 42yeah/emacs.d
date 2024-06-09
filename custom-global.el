@@ -22,3 +22,11 @@
 (use-package cmake-mode
   :ensure t
   :defer t)
+
+(use-package rainbow-delimiters
+  :ensure t
+  :hook ((prog-mode . rainbow-delimiters-mode)))
+
+(use-package smart-mode-line
+  :ensure t
+  :config (smart-mode-line-enable))

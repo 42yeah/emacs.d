@@ -90,7 +90,11 @@
 
   ;; Configure hooks to automatically turn-on eglot for selected modes
   :hook
-  (((c++-ts-mode c-ts-mode python-ts-mode) . eglot))
+  (((c++-ts-mode c-ts-mode python-ts-mode c-mode) . eglot-ensure))
+
+  :bind
+  (:map eglot-mode-map
+   ("C-M-." . consult-eglot-symbols))
   
   :custom
   (eglot-send-changes-idle-time 0.1)
@@ -105,17 +109,12 @@
 
 (use-package consult-eglot
   :ensure t
-  :defer t
-  :bind (
-         :map eglot-mode-map
-              ("C-M-." . consult-eglot-symbols)))
+  :defer t)
 
 (use-package symbol-overlay
   :ensure t
-  :bind (
-         :map eglot-mode-map
-              ("M-n" . 'symbol-overlay-jump-next)
-              ("M-p" . 'symbol-overlay-jump-prev))
+  :bind (("M-n" . 'symbol-overlay-jump-next)
+         ("M-p" . 'symbol-overlay-jump-prev))
   :hook ((prog-mode . symbol-overlay-mode)))
 
 ;; Treesitter options
