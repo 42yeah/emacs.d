@@ -89,9 +89,9 @@
   ;; no :ensure t here because it's built-in
 
   ;; Configure hooks to automatically turn-on eglot for selected modes
-  ; :hook
-  ; (((python-mode ruby-mode elixir-mode) . eglot))
-
+  :hook
+  (((c++-ts-mode c-ts-mode python-ts-mode) . eglot))
+  
   :custom
   (eglot-send-changes-idle-time 0.1)
   (eglot-extend-to-xref t)              ; activate Eglot in referenced non-project files
@@ -99,12 +99,24 @@
   :config
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
-  (add-hook 'c-ts-mode-hook 'eglot-ensure)
-  (add-hook 'c++-ts-mode-hook 'eglot-ensure)
-  (add-hook 'python-ts-mode-hook 'eglot-ensure)
   ;; (add-to-list 'eglot-server-programs
   ;;               '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   )
+
+(use-package consult-eglot
+  :ensure t
+  :defer t
+  :bind (
+         :map eglot-mode-map
+              ("C-M-." . consult-eglot-symbols)))
+
+(use-package symbol-overlay
+  :ensure t
+  :bind (
+         :map eglot-mode-map
+              ("M-n" . 'symbol-overlay-jump-next)
+              ("M-p" . 'symbol-overlay-jump-prev))
+  :hook ((prog-mode . symbol-overlay-mode)))
 
 ;; Treesitter options
 (setq treesit-language-source-alist
