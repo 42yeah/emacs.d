@@ -193,7 +193,7 @@ If the new path's directories does not exist, create them."
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; nShow the tab-bar as soon as tab-bar functions are invoked
+;; Show the tab-bar as soon as tab-bar functions are invoked
 (setopt tab-bar-show 1)
 
 ;; Add the time to the tab-bar, if visible
