@@ -170,7 +170,9 @@
   (:map corfu-map
         ("SPC" . corfu-insert-separator)
         ("C-n" . corfu-next)
-        ("C-p" . corfu-previous)))
+        ("C-p" . corfu-previous))
+  :config
+  (setq global-corfu-modes '((not debugger-mode) t)))
 
 ;; Part of corfu
 (use-package corfu-popupinfo

@@ -181,6 +181,9 @@ If the new path's directories does not exist, create them."
 
 ;; Nice line wrapping when working with text
 (add-hook 'text-mode-hook 'visual-line-mode)
+(defun do-truncate-lines ()
+  (setq truncate-lines t))
+(add-hook 'prog-mode-hook 'do-truncate-lines)
 
 ;; Modes to highlight the current line with
 (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
