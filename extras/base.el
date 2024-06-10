@@ -109,6 +109,8 @@
          :map isearch-mode-map
          ("M-e" . consult-isearch-history)   ; orig. isearch-edit-string
          ("M-s e" . consult-isearch-history) ; orig. isearch-edit-string
+         :map Info-mode-map
+         ("s" . consult-info)
          )
   :config
   ;; Narrowing lets you restrict results to certain groups of candidates
@@ -243,3 +245,10 @@
   :ensure t
   :config
   (global-hl-todo-mode))
+
+;; Windmove state swap left/right
+(use-package windmove
+  :bind (("C-S-<left>" . windmove-swap-states-left)
+         ("C-S-<right>" . windmove-swap-states-right)
+         ("C-S-<up>" . windmove-swap-states-up)
+         ("C-S-<down>" . windmove-swap-states-down)))
