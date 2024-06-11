@@ -30,3 +30,7 @@
 (use-package smart-mode-line
   :ensure t
   :config (smart-mode-line-enable))
+
+(use-package indent-guide
+  :ensure t
+  :config (indent-guide-global-mode))
