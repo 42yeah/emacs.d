@@ -308,7 +308,7 @@ If the new path's directories does not exist, create them."
  '(mc/always-run-for-all t)
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
-   '(indent-guide smart-mode-line-powerline-theme smart-mode-line rainbow-delimiters rainbow-delimeters all-the-icons symbol-overlay consult-eglot s ujelly-theme tangonov-theme tango-plus-theme tangotango-theme apropospriate-theme pulsar svelte-mode cmake-mode vterm markdown-mode ligature-pragmatapro annotate beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+   '(esup indent-guide smart-mode-line-powerline-theme smart-mode-line rainbow-delimiters rainbow-delimeters all-the-icons symbol-overlay consult-eglot s ujelly-theme tangonov-theme tango-plus-theme tangotango-theme apropospriate-theme pulsar svelte-mode cmake-mode vterm markdown-mode ligature-pragmatapro annotate beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolation-between-scroll 0.001)
  '(pixel-scroll-precision-interpolation-total-time 0.1)
