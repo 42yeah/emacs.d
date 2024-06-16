@@ -34,3 +34,13 @@
 (use-package indent-guide
   :ensure t
   :config (indent-guide-global-mode))
+
+(use-package treemacs
+  :ensure t
+  :bind (("C-x C-m" . treemacs)))
+
+;; Multi-cursor
+;; https://github.com/magnars/multiple-cursors.el
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-+" . 'mc/mark-next-like-this)))

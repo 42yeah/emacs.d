@@ -119,6 +119,17 @@
          ("M-p" . 'symbol-overlay-jump-prev))
   :hook ((prog-mode . symbol-overlay-mode)))
 
+(use-package mhtml-mode
+  :bind (:map mhtml-mode-map
+         ("C-c C-l" . html-div)))
+
+(use-package sgml-mode
+  :bind (:map sgml-mode-map
+              ("C-M-n" . sgml-skip-tag-forward)
+              ("C-M-p" . sgml-skip-tag-backward)
+              ("C-M-d" . forward-list) ;; Best I can do
+              ("C-M-u" . backward-list)))
+
 ;; Treesitter options
 (setq treesit-language-source-alist
    '((bash "https://github.com/tree-sitter/tree-sitter-bash")

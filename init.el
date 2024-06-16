@@ -232,7 +232,8 @@ If the new path's directories does not exist, create them."
 (load-file (expand-file-name "extras/dev.el" user-emacs-directory))
 
 ;; My local, custom scripts
-(load-file (expand-file-name "custom.el" user-emacs-directory))
+(if (file-exists-p "custom.el")
+    (load-file (expand-file-name "custom.el" user-emacs-directory)))
 
 ;; My global, custom scripts
 (load-file (expand-file-name "custom-global.el" user-emacs-directory))
@@ -269,24 +270,18 @@ If the new path's directories does not exist, create them."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(TeX-view-program-selection
-   '(((output-dvi has-no-display-manager)
-      "dvi2tty")
-     ((output-dvi style-pstricks)
-      "dvips and gv")
-     (output-dvi "xdvi")
-     (output-pdf "Okular")
-     (output-html "xdg-open")))
+   '(((output-dvi has-no-display-manager) "dvi2tty")
+     ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi")
+     (output-pdf "Okular") (output-html "xdg-open")))
  '(beacon-blink-when-point-moves-vertically 5)
  '(beacon-color "#ffaa11")
  '(beacon-size 40)
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style
-   '((java-mode . "java")
-     (awk-mode . "awk")
-     (csharp-mode . "csharp")
+   '((java-mode . "java") (awk-mode . "awk") (csharp-mode . "csharp")
      (other . "linux")))
- '(c-offsets-alist '((inline-open . +)))
+ '(c-offsets-alist '((inline-open . +) (innamespace . +)))
  '(c-ts-mode-indent-offset 4)
  '(c-ts-mode-indent-style 'linux)
  '(column-number-mode t)
@@ -296,19 +291,44 @@ If the new path's directories does not exist, create them."
  '(corfu-quit-no-match t)
  '(css-indent-offset 4)
  '(custom-safe-themes
-   '("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "efcecf09905ff85a7c80025551c657299a4d18c5fcfedd3b2f2b6287e4edd659" "57a29645c35ae5ce1660d5987d3da5869b048477a7801ce7ab57bfb25ce12d3e" "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3" "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2" "dfb1c8b5bfa040b042b4ef660d0aab48ef2e89ee719a1f24a4629a0c5ed769e8" "6f96a9ece5fdd0d3e04daea6aa63e13be26b48717820aa7b5889c602764cf23a" "d6b934330450d9de1112cbb7617eaf929244d192c4ffb1b9e6b63ad574784aad" "4ade6b630ba8cbab10703b27fd05bb43aaf8a3e5ba8c2dc1ea4a2de5f8d45882" "4e2e42e9306813763e2e62f115da71b485458a36e8b4c24e17a2168c45c9cf9d" "dccf4a8f1aaf5f24d2ab63af1aa75fd9d535c83377f8e26380162e888be0c6a9" "b5fd9c7429d52190235f2383e47d340d7ff769f141cd8f9e7a4629a81abc6b19" "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69" default))
+   '("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa"
+     "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223"
+     "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e"
+     "efcecf09905ff85a7c80025551c657299a4d18c5fcfedd3b2f2b6287e4edd659"
+     "57a29645c35ae5ce1660d5987d3da5869b048477a7801ce7ab57bfb25ce12d3e"
+     "4c56af497ddf0e30f65a7232a8ee21b3d62a8c332c6b268c81e9ea99b11da0d3"
+     "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e"
+     "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2"
+     "dfb1c8b5bfa040b042b4ef660d0aab48ef2e89ee719a1f24a4629a0c5ed769e8"
+     "6f96a9ece5fdd0d3e04daea6aa63e13be26b48717820aa7b5889c602764cf23a"
+     "d6b934330450d9de1112cbb7617eaf929244d192c4ffb1b9e6b63ad574784aad"
+     "4ade6b630ba8cbab10703b27fd05bb43aaf8a3e5ba8c2dc1ea4a2de5f8d45882"
+     "4e2e42e9306813763e2e62f115da71b485458a36e8b4c24e17a2168c45c9cf9d"
+     "dccf4a8f1aaf5f24d2ab63af1aa75fd9d535c83377f8e26380162e888be0c6a9"
+     "b5fd9c7429d52190235f2383e47d340d7ff769f141cd8f9e7a4629a81abc6b19"
+     "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69"
+     default))
  '(delete-selection-mode t)
  '(display-time-mode t)
+ '(dogears-functions
+   '(avy-goto-char avy-goto-char-2 avy-goto-line avy-goto-char-timer))
  '(electric-pair-mode t)
  '(global-visible-mark-mode t)
  '(hl-todo-color-background nil)
  '(kind-icon-default-style
-   '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 0.7 :scale 1.0 :background nil))
+   '(:padding 0 :stroke 0 :margin 0 :radius 0 :height 0.7 :scale 1.0
+              :background nil))
  '(lambda-line-vc-symbol "")
  '(mc/always-run-for-all t)
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
-   '(esup indent-guide smart-mode-line-powerline-theme smart-mode-line rainbow-delimiters rainbow-delimeters all-the-icons symbol-overlay consult-eglot s ujelly-theme tangonov-theme tango-plus-theme tangotango-theme apropospriate-theme pulsar svelte-mode cmake-mode vterm markdown-mode ligature-pragmatapro annotate beacon solarized-theme hl-todo auctex multiple-cursors visible-mark fish-mode nov json-mode yaml-mode magit whole-line-or-region wgrep orderless kind-icon cape corfu-terminal corfu marginalia vertico embark-consult embark consult avy which-key))
+   '(annotate auctex avy beacon cape cmake-mode consult-eglot
+              corfu-terminal dogears embark-consult hl-todo
+              indent-guide json-mode kind-icon magit marginalia
+              markdown-mode multiple-cursors orderless
+              rainbow-delimiters smart-mode-line standard-themes
+              svelte-mode symbol-overlay treemacs vertico visible-mark
+              vterm wgrep which-key whole-line-or-region yaml-mode))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolation-between-scroll 0.001)
  '(pixel-scroll-precision-interpolation-total-time 0.1)
@@ -316,16 +336,13 @@ If the new path's directories does not exist, create them."
  '(pixel-scroll-precision-use-momentum nil)
  '(recenter-positions '(middle bottom top))
  '(safe-local-variable-values
-   '((eval when
-           (fboundp 'rainbow-mode)
-           (rainbow-mode 1))
+   '((eval when (fboundp 'rainbow-mode) (rainbow-mode 1))
      (vc-default-patch-addressee . "bug-gnu-emacs@gnu.org")
      (etags-regen-ignores "test/manual/etags/")
      (etags-regen-regexp-alist
-      (("c" "objc")
-       "/[ \11]*DEFVAR_[A-Z_ \11(]+\"\\([^\"]+\\)\"/\\1/" "/[ \11]*DEFVAR_[A-Z_ \11(]+\"[^\"]+\",[ \11]\\([A-Za-z0-9_]+\\)/\\1/"))
-     (TeX-master . t)
-     (reftex-default-bibliography "./adaptive.bib")))
+      (("c" "objc") "/[ \11]*DEFVAR_[A-Z_ \11(]+\"\\([^\"]+\\)\"/\\1/"
+       "/[ \11]*DEFVAR_[A-Z_ \11(]+\"[^\"]+\",[ \11]\\([A-Za-z0-9_]+\\)/\\1/"))
+     (TeX-master . t) (reftex-default-bibliography "./adaptive.bib")))
  '(sml/theme 'automatic)
  '(tab-bar-close-button-show nil)
  '(tab-bar-mode t)
@@ -338,3 +355,4 @@ If the new path's directories does not exist, create them."
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "PragmataPro Liga" :foundry "FSD " :slant normal :weight regular :height 120 :width normal)))))
 (put 'dired-find-alternate-file 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
