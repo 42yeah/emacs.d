@@ -27,10 +27,10 @@
   (error (format "Emacs Bedrock only works with Emacs 29 and newer; you have version ~a" emacs-major-version)))
 
 (if (eq system-type 'windows-nt)
-    (setq url-proxy-services '(("http" . "127.0.0.1:10809")
-                               ("https" . "127.0.0.1:10809")))
-  (setq url-proxy-services '(("http" . "127.0.0.1:7890")
-                             ("https" . "127.0.0.1:7890"))))
+    (setq url-proxy-services '(("http" . "127.0.0.1:20122")
+                               ("https" . "127.0.0.1:20122")))
+  (setq url-proxy-services '(("http" . "127.0.0.1:20122")
+                             ("https" . "127.0.0.1:20122"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -232,7 +232,7 @@ If the new path's directories does not exist, create them."
 (load-file (expand-file-name "extras/dev.el" user-emacs-directory))
 
 ;; My local, custom scripts
-(if (file-exists-p "custom.el")
+(if (file-exists-p (expand-file-name "custom.el" user-emacs-directory))
     (load-file (expand-file-name "custom.el" user-emacs-directory)))
 
 ;; My global, custom scripts
@@ -322,13 +322,13 @@ If the new path's directories does not exist, create them."
  '(mc/always-run-for-all t)
  '(modus-themes-vivendi-color-overrides nil)
  '(package-selected-packages
-   '(annotate auctex avy beacon cape cmake-mode consult-eglot
-              corfu-terminal dogears embark-consult hl-todo
-              indent-guide json-mode kind-icon magit marginalia
-              markdown-mode multiple-cursors orderless
-              rainbow-delimiters smart-mode-line standard-themes
-              svelte-mode symbol-overlay treemacs vertico visible-mark
-              vterm wgrep which-key whole-line-or-region yaml-mode))
+   '(auctex beacon cape cmake-mode consult-eglot corfu-terminal
+            embark-consult hl-todo indent-guide json-mode kbd-mode
+            kind-icon magit marginalia markdown-mode multiple-cursors
+            orderless rainbow-delimiters smart-mode-line
+            symbol-overlay treemacs undo-tree vertico wgrep
+            whole-line-or-region yaml-mode))
+ '(package-vc-selected-packages '((kbd-mode :url "https://github.com/kmonad/kbd-mode")))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolation-between-scroll 0.001)
  '(pixel-scroll-precision-interpolation-total-time 0.1)
