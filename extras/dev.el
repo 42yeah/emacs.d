@@ -47,6 +47,34 @@
   ;; Auto parenthesis matching
   ((prog-mode . electric-pair-mode)))
 
+(use-package c-ts-mode
+  :config
+  (defun ft/c-ts-indent-style()
+    "Override the built-in BSD indentation style with some additional rules"
+    `(
+      (cpp
+       ;; align function arguments to the start of the first one, offset if standalone
+       ((match nil "argument_list" nil 1 1) parent-bol c-ts-mode-indent-offset)
+       ((parent-is "argument_list") (nth-sibling 1) 0)
+       ;; same for parameters
+       ((match nil "parameter_list" nil 1 1) parent-bol c-ts-mode-indent-offset)
+       ((parent-is "parameter_list") (nth-sibling 1) 0)
+       ;; indent inside case blocks
+       ((parent-is "case_statement") standalone-parent c-ts-mode-indent-offset)
+       ;; do not indent preprocessor statements
+       ((node-is "preproc") column-0 0)
+       ((n-p-gp nil nil "namespace_definition") grand-parent 0)
+       ((node-is "field_declaration_list") parent-bol 0)
+       ((node-is "access_specifier") parent-bol 0)
+       ((n-p-gp "}" nil "class_specifier") parent-bol 0)
+       ((n-p-gp nil nil "class_specifier") parent-bol c-ts-mode-indent-offset)
+       ;; append to bsd style
+       ,@(alist-get 'cpp (c-ts-mode--simple-indent-rules 'cpp 'bsd)))))
+  (c-ts-mode-set-global-style #'ft/c-ts-indent-style))
+
+;; For debugging treesitter
+;; (setq treesit--indent-verbose t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Version Control
@@ -93,15 +121,17 @@
   ;; Configure hooks to automatically turn-on eglot for selected modes
   :hook
   (((c++-ts-mode c-ts-mode python-ts-mode c-mode) . eglot-ensure))
+  ((c++-ts-mode c-ts-mode) .
+   (lambda () (c-ts-mode-set-style #'ft/c-ts-indent-style)))
 
   :bind
   (:map eglot-mode-map
-   ("C-M-." . consult-eglot-symbols))
-  
+        ("C-M-." . consult-eglot-symbols))
+
   :custom
   (eglot-send-changes-idle-time 0.1)
   (eglot-extend-to-xref t)              ; activate Eglot in referenced non-project files
-  
+
   :config
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
@@ -121,7 +151,7 @@
 
 (use-package mhtml-mode
   :bind (:map mhtml-mode-map
-         ("C-c C-l" . html-div)))
+              ("C-c C-l" . html-div)))
 
 (use-package sgml-mode
   :bind (:map sgml-mode-map
@@ -132,19 +162,19 @@
 
 ;; Treesitter options
 (setq treesit-language-source-alist
-   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-     (cmake "https://github.com/uyha/tree-sitter-cmake")
-     (css "https://github.com/tree-sitter/tree-sitter-css")
-     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-     (go "https://github.com/tree-sitter/tree-sitter-go")
-     (html "https://github.com/tree-sitter/tree-sitter-html")
-     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-     (json "https://github.com/tree-sitter/tree-sitter-json")
-     (make "https://github.com/alemuller/tree-sitter-make")
-     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-     (python "https://github.com/tree-sitter/tree-sitter-python")
-     (toml "https://github.com/tree-sitter/tree-sitter-toml")
-     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-     (yaml "https://github.com/ikatyang/tree-sitter-yaml")
-     (c "https://github.com/tree-sitter/tree-sitter-c")))
+      '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+        (cmake "https://github.com/uyha/tree-sitter-cmake")
+        (css "https://github.com/tree-sitter/tree-sitter-css")
+        (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+        (go "https://github.com/tree-sitter/tree-sitter-go")
+        (html "https://github.com/tree-sitter/tree-sitter-html")
+        (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+        (json "https://github.com/tree-sitter/tree-sitter-json")
+        (make "https://github.com/alemuller/tree-sitter-make")
+        (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (toml "https://github.com/tree-sitter/tree-sitter-toml")
+        (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+        (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+        (yaml "https://github.com/ikatyang/tree-sitter-yaml")
+        (c "https://github.com/tree-sitter/tree-sitter-c")))
