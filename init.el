@@ -239,8 +239,8 @@ If the new path's directories does not exist, create them."
 (load-file (expand-file-name "custom-global.el" user-emacs-directory))
 
 ;; PragmataPro Ligatures
-(load-file (expand-file-name "pragmatapro-lig.el" user-emacs-directory))
-(pragmatapro-lig-global-mode)
+;; (load-file (expand-file-name "pragmatapro-lig.el" user-emacs-directory))
+;; (pragmatapro-lig-global-mode)
 
 ;; Vim-bindings in Emacs (evil-mode configuration)
 ;(load-file (expand-file-name "extras/vim-like.el" user-emacs-directory))
@@ -273,17 +273,17 @@ If the new path's directories does not exist, create them."
    '(((output-dvi has-no-display-manager) "dvi2tty")
      ((output-dvi style-pstricks) "dvips and gv") (output-dvi "xdvi")
      (output-pdf "Okular") (output-html "xdg-open")))
+ '(auth-source-save-behavior nil)
  '(beacon-blink-when-point-moves-vertically 5)
  '(beacon-color "#ffaa11")
  '(beacon-size 40)
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style
-   '((java-mode . "java") (awk-mode . "awk") (csharp-mode . "csharp")
-     (other . "linux")))
+   '((c-mode . "linux") (c++-mode . "linux") (java-mode . "java")
+     (awk-mode . "awk") (csharp-mode . "csharp") (other . "linux")))
  '(c-offsets-alist '((inline-open . +) (innamespace . +)))
  '(c-ts-mode-indent-offset 4)
- '(c-ts-mode-indent-style 'linux)
  '(column-number-mode t)
  '(corfu-auto t)
  '(corfu-auto-delay 0.1)
@@ -324,10 +324,10 @@ If the new path's directories does not exist, create them."
  '(package-selected-packages
    '(auctex beacon cape cmake-mode consult-eglot corfu-terminal
             embark-consult hl-todo indent-guide json-mode kbd-mode
-            kind-icon magit marginalia markdown-mode multiple-cursors
-            orderless rainbow-delimiters smart-mode-line
-            symbol-overlay treemacs undo-tree vertico wgrep
-            whole-line-or-region yaml-mode))
+            kind-icon magit marginalia markdown-mode meson-mode
+            multiple-cursors orderless rainbow-delimiters
+            smart-mode-line symbol-overlay treemacs undo-tree vertico
+            vterm wgrep whole-line-or-region yaml-mode))
  '(package-vc-selected-packages '((kbd-mode :url "https://github.com/kmonad/kbd-mode")))
  '(pixel-scroll-mode t)
  '(pixel-scroll-precision-interpolation-between-scroll 0.001)
@@ -353,6 +353,6 @@ If the new path's directories does not exist, create them."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "PragmataPro Liga" :foundry "FSD " :slant normal :weight regular :height 120 :width normal)))))
+ '(default ((t (:family "Source Code Pro" :foundry "ADBO" :slant normal :weight medium :height 102 :width normal)))))
 (put 'dired-find-alternate-file 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
